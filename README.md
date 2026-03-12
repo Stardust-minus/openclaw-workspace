@@ -38,6 +38,8 @@ openclaw-workspace/
 | **[web-search](skills/web-search/)** | 五子并行搜索机制，覆盖中文、英文、官方源 | [查看文档](skills/web-search/README.md) |
 | **[scc-tunnel](skills/scc-tunnel/)** | SCC 内网穿透工具，HTTP/TCP 隧道 | [查看文档](skills/scc-tunnel/README.md) |
 
+> 更多技能正在添加中...
+
 ### 💡 技能说明
 
 每个技能都是独立的模块，包含：
