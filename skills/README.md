@@ -46,12 +46,6 @@ nano .env
 # 参考各技能的 README.md
 ```
 
-### 安全注意事项
-
-- **不要提交 `.env` 文件** - 已添加到 `.gitignore`
-- **Token 定期更新** - 建议 90 天更换一次
-- **权限最小化** - 只给必要的 API 权限
-
 ---
 
 ## English
@@ -89,12 +83,6 @@ nano .env
 # 4. Use the skill
 # Refer to each skill's README.md
 ```
-
-### Security Notes
-
-- **Do not commit `.env` files** - Already added to `.gitignore`
-- **Rotate Token regularly** - Recommended every 90 days
-- **Minimal permissions** - Only grant necessary API permissions
 
 ---
 

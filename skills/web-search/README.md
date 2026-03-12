@@ -105,12 +105,6 @@ web-search/
 └── .gitignore          # Git 忽略
 ```
 
-### ⚠ 安全注意事项
-
-- **不要提交 `.env` 文件** - 已添加到 `.gitignore`
-- **Token 定期更新** - 建议 90 天更换一次
-- **权限最小化** - 只给必要的 API 权限
-
 ---
 
 ## English
@@ -206,12 +200,6 @@ web-search/
 ├── .env.example        # Environment template
 └── .gitignore          # Git ignore
 ```
-
-### ⚠ Security Notes
-
-- **Do not commit `.env` files** - Already added to `.gitignore`
-- **Rotate Token regularly** - Recommended every 90 days
-- **Minimal permissions** - Only grant necessary API permissions
 
 ---
 

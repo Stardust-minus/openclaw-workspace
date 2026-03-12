@@ -63,12 +63,6 @@ openclaw-workspace/
 4. 配置环境变量（如需）
 5. 开始使用
 
-### ⚠ 安全注意事项
-
-- **不要提交 `.env` 文件** - 已添加到 `.gitignore`
-- **Token 定期更新** - 建议 90 天更换一次
-- **权限最小化** - 只给必要的 API 权限
-
 ---
 
 ## English
@@ -107,12 +101,6 @@ Each skill is an independent module containing:
 3. Install dependencies per README
 4. Configure environment variables (if needed)
 5. Start using
-
-### ⚠ Security Notes
-
-- **Do not commit `.env` files** - Already added to `.gitignore`
-- **Rotate Token regularly** - Recommended every 90 days
-- **Minimal permissions** - Only grant necessary API permissions
 
 ---
 
