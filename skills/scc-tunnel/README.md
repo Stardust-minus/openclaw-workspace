@@ -26,24 +26,53 @@
 
 ### 📦 安装
 
-**1. 下载 scc-cli**
+**方式 1：一键安装脚本（推荐）**
 
-访问官网下载对应平台的压缩包：
-https://dl.scc.paratera.com/scc-cli/latest/
-
-**Linux x86_64:**
 ```bash
-cd /tmp
-curl -LO https://dl.scc.paratera.com/scc-cli/latest/scc-cli-0.1.3_linux_x86_64.tar.gz
-tar -xzf scc-cli-0.1.3_linux_x86_64.tar.gz
-sudo mv scc /usr/local/bin/
-sudo chmod +x /usr/local/bin/scc
+# Linux x86_64
+curl -fsSL https://dl.scc.paratera.com/scc-cli/latest/scc-cli-0.1.3_linux_x86_64.tar.gz | tar -xz && sudo mv scc /usr/local/bin/ && sudo chmod +x /usr/local/bin/scc
+
+# 验证安装
+scc --version
 ```
 
-**2. 验证安装**
+**方式 2：手动下载**
+
+访问官方下载页面：
+- **下载链接**: https://dl.scc.paratera.com/scc-cli/latest/
+- **GitHub**: （如果有）
+
+选择对应平台的压缩包：
+- `scc-cli-0.1.3_linux_x86_64.tar.gz` - Linux x86_64
+- `scc-cli-0.1.3_darwin_x86_64.tar.gz` - macOS Intel
+- `scc-cli-0.1.3_darwin_arm64.tar.gz` - macOS Apple Silicon
+- `scc-cli-0.1.3_windows_x86_64.zip` - Windows
+
+**手动安装步骤：**
 ```bash
+# 1. 下载
+cd /tmp
+curl -LO https://dl.scc.paratera.com/scc-cli/latest/scc-cli-0.1.3_linux_x86_64.tar.gz
+
+# 2. 解压
+tar -xzf scc-cli-0.1.3_linux_x86_64.tar.gz
+
+# 3. 移动到系统路径
+sudo mv scc /usr/local/bin/
+sudo chmod +x /usr/local/bin/scc
+
+# 4. 验证
 scc --version
-# 输出：scc version 0.1.3
+```
+
+**方式 3：使用包管理器（如果可用）**
+
+```bash
+# Homebrew (macOS)
+# brew install scc-cli  # 如果有的话
+
+# APT (Ubuntu/Debian)
+# sudo apt install scc-cli  # 如果有的话
 ```
 
 ### 🚀 快速开始
@@ -108,6 +137,35 @@ scc tun tcp 2017
 | **进程保持** | 隧道需要持续运行，停止命令会关闭隧道 |
 | **公网访问** | 生成的 URL 可从任何地方访问 |
 | **无需认证** | 无需登录即可使用 |
+
+### ❓ FAQ
+
+**Q: 为什么二进制文件不推送到 Git 仓库？**
+
+A: 二进制文件不适合版本控制，原因：
+- 文件体积大，增加仓库大小
+- 无法 diff，每次更新都是全新文件
+- GitHub 限制单个文件 100MB
+- 更新麻烦，需要重新提交
+
+推荐做法：
+- ✅ 提供官方下载链接
+- ✅ 提供一键安装脚本
+- ✅ 在 README 中说明安装步骤
+
+**Q: SCC 隧道稳定吗？**
+
+A: SCC 是 ParaCloud 提供的免费内网穿透服务，适合临时使用和开发测试。生产环境建议使用：
+- 自建 frp/ngrok 隧道
+- 云服务器 + 反向代理
+- 商业内网穿透服务
+
+**Q: 隧道会超时断开吗？**
+
+A: 免费隧道可能有超时限制，建议：
+- 长时间运行使用后台进程
+- 重要服务使用付费方案
+- 定期检查隧道状态
 
 ### 🛠️ 管理隧道进程
 

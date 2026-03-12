@@ -36,8 +36,23 @@ openclaw-workspace/
 | 技能 | 描述 | 详细文档 |
 |------|------|----------|
 | **[web-search](skills/web-search/)** | 五子并行搜索机制，覆盖中文、英文、官方源 | [查看文档](skills/web-search/README.md) |
-| **[scc-tunnel](skills/scc-tunnel/)** | SCC 内网穿透工具，将本地服务暴露到公网 | [查看文档](skills/scc-tunnel/README.md) |
+| **[scc-tunnel](skills/scc-tunnel/)** | SCC 内网穿透工具，HTTP/TCP 隧道 | [查看文档](skills/scc-tunnel/README.md) |
 | **[image-edit](skills/image-edit/)** | ComfyUI Hunyuan 图像编辑技能 | [查看文档](skills/image-edit/README.md) |
+
+### 💡 技能说明
+
+每个技能都是独立的模块，包含：
+- ✅ 完整的中英双语文档
+- ✅ 安装和配置说明
+- ✅ 使用示例
+- ✅ 安全注意事项
+
+**使用流程：**
+1. 克隆仓库
+2. 进入技能目录
+3. 按照 README 安装依赖
+4. 配置环境变量（如需）
+5. 开始使用
 
 ### 快速开始
 
