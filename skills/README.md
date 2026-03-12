@@ -18,11 +18,13 @@
 
 ### 当前技能
 
-| 技能 | 描述 | 详细文档 |
-|------|------|----------|
-| **[web-search](web-search/)** | 五子并行搜索机制，覆盖中文、英文、官方源 | [查看文档](web-search/README.md) |
-| **[scc-tunnel](scc-tunnel/)** | SCC 内网穿透工具，HTTP/TCP 隧道 | [查看文档](scc-tunnel/README.md) |
-| **[image-edit](image-edit/)** | ComfyUI AI 图像编辑（Hunyuan/Qwen） | [查看文档](image-edit/README.md) |
+| 技能 | 描述 | 详细文档 | 状态 |
+|------|------|----------|------|
+| **[web-search](web-search/)** | 五子并行搜索机制，覆盖中文、英文、官方源 | [查看文档](web-search/README.md) | ✅ 稳定 |
+| **[scc-tunnel](scc-tunnel/)** | SCC 内网穿透工具，HTTP/TCP 隧道 | [查看文档](scc-tunnel/README.md) | ✅ 稳定 |
+| **[image-edit](image-edit/)** | ComfyUI AI 图像编辑（Hunyuan/Qwen） | [查看文档](image-edit/README.md) | ⏳ WIP |
+
+> **WIP** = Work In Progress（进行中）
 
 ### 使用方式
 

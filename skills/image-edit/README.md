@@ -4,6 +4,8 @@
 
 **AI-Powered Image Editing with ComfyUI**
 
+> ⚠ **WIP (Work In Progress)** - Qwen 模型支持尚未测试
+
 [中文](#-中文) | [English](#-english)
 
 </div>
@@ -90,10 +92,12 @@ else:
 
 ### 支持的模型
 
-| 模型 | 类型 | 说明 |
-|------|------|------|
-| **hunyuan** | HunyuanImage-3.0-Instruct | 腾讯混元，支持复杂指令 |
-| **qwen** | Qwen-Image-Edit | 通义千问，编辑精度高 |
+| 模型 | 类型 | 说明 | 状态 |
+|------|------|------|------|
+| **hunyuan** | HunyuanImage-3.0-Instruct | 腾讯混元，支持复杂指令 | ✅ 已测试 |
+| **qwen** | Qwen-Image-Edit | 通义千问，编辑精度高 | ⏳ WIP |
+
+> **注意**：Qwen 模型支持尚未测试，目前推荐使用 Hunyuan 模型。
 
 ### 编辑指令示例
 
