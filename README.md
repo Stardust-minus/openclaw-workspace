@@ -14,10 +14,13 @@
 
 ```
 openclaw-workspace/
-├── skills/              # AI 技能目录 / AI Skills
-│   └── web-search/     # 五子并行搜索技能 / 5-Agent Parallel Search
-├── .gitignore          # Git 忽略配置 / Git Ignore Config
-└── README.md           # 本文件 / This File
+├── skills/                  # AI 技能目录 / AI Skills
+│   ├── web-search/         # 五子并行搜索技能
+│   ├── scc-tunnel/         # SCC 内网穿透技能
+│   ├── image-edit/         # ComfyUI 图像编辑技能
+│   └── ...
+├── .gitignore              # Git 忽略配置
+└── README.md               # 本文件
 ```
 
 ---
@@ -28,72 +31,31 @@ openclaw-workspace/
 
 这是 OpenClaw AI 助手的工作空间仓库，用于存储 AI 技能、项目代码和自动化脚本。
 
-### 🔧 web-search Skill
+### 🔧 可用技能
 
-五子 agent 并行搜索机制，覆盖中文、英文、官方源和结构化数据。
+| 技能 | 描述 | 详细文档 |
+|------|------|----------|
+| **[web-search](skills/web-search/)** | 五子并行搜索机制，覆盖中文、英文、官方源 | [查看文档](skills/web-search/README.md) |
+| **[scc-tunnel](skills/scc-tunnel/)** | SCC 内网穿透工具，将本地服务暴露到公网 | [查看文档](skills/scc-tunnel/README.md) |
+| **[image-edit](skills/image-edit/)** | ComfyUI Hunyuan 图像编辑技能 | [查看文档](skills/image-edit/README.md) |
 
-#### 五子架构
+### 快速开始
 
-| 序号 | 类型 | 搜索方式 | 覆盖范围 |
-|------|------|----------|----------|
-| 1 | 浏览器 | 百度搜索 | 中文信息 |
-| 2 | 浏览器 | Bing 中国搜索 | 海外/官方源 |
-| 3 | API | 智谱 API | 国内 + 海外 |
-| 4 | API | Brave API | 英文/海外 |
-| 5 | 抓取 | 定向网站 | 结构化数据 |
-
-#### 配置步骤
-
-**1. 复制配置文件**
+**1. 克隆仓库**
 ```bash
-cd skills/web-search
-cp .env.example .env
+git clone https://github.com/Stardust-minus/openclaw-workspace.git
+cd openclaw-workspace
 ```
 
-**2. 编辑 .env 文件**
+**2. 浏览技能**
 ```bash
-# API Keys（需要自行申请）
-ZHIPU_API_KEY=your_key_here
-BRAVE_API_KEY=your_key_here
-
-# 超时配置
-SEARCH_TIMEOUT=300
-CRAWL_TIMEOUT=30
-PROGRESS_INTERVAL=60
-
-# 搜索配置
-MAX_RESULTS_PER_AGENT=5
-DEEP_CRAWL_ENABLED=true
-MAX_PAGES_PER_AGENT=3
+ls skills/
 ```
 
-**3. 安装依赖**
-```bash
-pip install playwright python-dotenv aiohttp
-playwright install chromium firefox
-```
+**3. 使用技能**
+每个技能都有独立的 README 文档，包含详细的配置和使用说明。
 
-#### 使用方法
-
-在子 agent 中调用：
-```python
-from search import search
-
-result = await search(
-    query="搜索关键词",
-    max_results=5,
-    deep_crawl=True
-)
-```
-
-#### 结果输出
-
-搜索结果自动保存到 `search_results.json` 文件，包含：
-- 完整的搜索结果（标题、链接、摘要、内容）
-- 每个 agent 的结果
-- 去重后的汇总报告
-
-#### ⚠️ 安全注意事项
+### ⚠️ 安全注意事项
 
 - **不要提交 `.env` 文件** - 已添加到 `.gitignore`
 - **Token 定期更新** - 建议 90 天更换一次
@@ -107,74 +69,33 @@ result = await search(
 
 This is the dedicated workspace repository for OpenClaw AI Assistant, used to store AI skills, project code, and automation scripts.
 
-### 🔧 web-search Skill
+### 🔧 Available Skills
 
-Five-agent parallel search mechanism, covering Chinese, English, official sources, and structured data.
+| Skill | Description | Documentation |
+|-------|-------------|---------------|
+| **[web-search](skills/web-search/)** | Five-agent parallel search mechanism | [View Docs](skills/web-search/README.md) |
+| **[scc-tunnel](skills/scc-tunnel/)** | SCC tunnel tool to expose local services to public internet | [View Docs](skills/scc-tunnel/README.md) |
+| **[image-edit](skills/image-edit/)** | ComfyUI Hunyuan image editing skill | [View Docs](skills/image-edit/README.md) |
 
-#### Five-Agent Architecture
+### Quick Start
 
-| # | Type | Search Method | Coverage |
-|---|------|---------------|----------|
-| 1 | Browser | Baidu Search | Chinese content |
-| 2 | Browser | Bing China Search | Overseas/Official sources |
-| 3 | API | Zhipu API | Domestic + Overseas |
-| 4 | API | Brave Search API | English/Overseas |
-| 5 | Crawler | Direct Website | Structured data |
-
-#### Configuration Steps
-
-**1. Copy configuration file**
+**1. Clone repository**
 ```bash
-cd skills/web-search
-cp .env.example .env
+git clone https://github.com/Stardust-minus/openclaw-workspace.git
+cd openclaw-workspace
 ```
 
-**2. Edit .env file**
+**2. Browse skills**
 ```bash
-# API Keys (need to apply separately)
-ZHIPU_API_KEY=your_key_here
-BRAVE_API_KEY=your_key_here
-
-# Timeout configuration
-SEARCH_TIMEOUT=300
-CRAWL_TIMEOUT=30
-PROGRESS_INTERVAL=60
-
-# Search configuration
-MAX_RESULTS_PER_AGENT=5
-DEEP_CRAWL_ENABLED=true
-MAX_PAGES_PER_AGENT=3
+ls skills/
 ```
 
-**3. Install dependencies**
-```bash
-pip install playwright python-dotenv aiohttp
-playwright install chromium firefox
-```
+**3. Use skills**
+Each skill has its own README with detailed configuration and usage instructions.
 
-#### Usage
+### ⚠️ Security Notes
 
-Call in sub-agent:
-```python
-from search import search
-
-result = await search(
-    query="search keyword",
-    max_results=5,
-    deep_crawl=True
-)
-```
-
-#### Output
-
-Search results are automatically saved to `search_results.json`, including:
-- Complete search results (title, link, summary, content)
-- Results from each agent
-- De-duplicated summary report
-
-#### ⚠️ Security Notes
-
-- **Do not commit `.env` file** - Already added to `.gitignore`
+- **Do not commit `.env` files** - Already added to `.gitignore`
 - **Rotate Token regularly** - Recommended every 90 days
 - **Minimal permissions** - Only grant necessary API permissions
 
