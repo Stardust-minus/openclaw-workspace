@@ -38,10 +38,11 @@ playwright install chromium firefox
 **2. 配置环境变量**
 ```bash
 cp .env.example .env
-nano .env
 ```
 
 **3. 填写 API Keys**
+
+编辑 `.env` 文件，填入真实的 API Keys：
 ```bash
 # 智谱 API Key（申请地址：https://open.bigmodel.cn）
 ZHIPU_API_KEY=your_key_here
