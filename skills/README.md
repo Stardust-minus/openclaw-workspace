@@ -62,12 +62,13 @@ This directory contains various skills for OpenClaw AI Assistant. Each skill is 
 
 ### Current Skills
 
-| Skill | Description | Documentation |
-|-------|-------------|---------------|
-| **[web-search](web-search/)** | Five-agent parallel search mechanism | [View Docs](web-search/README.md) |
-| **[scc-tunnel](scc-tunnel/)** | SCC tunnel tool for HTTP/TCP tunnels | [View Docs](scc-tunnel/README.md) |
+| Skill | Description | Documentation | Status |
+|-------|-------------|---------------|--------|
+| **[web-search](web-search/)** | Five-agent parallel search mechanism | [View Docs](web-search/README.md) | ✅ Stable |
+| **[scc-tunnel](scc-tunnel/)** | SCC tunnel tool for HTTP/TCP tunnels | [View Docs](scc-tunnel/README.md) | ✅ Stable |
+| **[image-edit](image-edit/)** | ComfyUI AI image editing (Hunyuan/Qwen) | [View Docs](image-edit/README.md) | ⏳ WIP |
 
-> More skills coming soon...
+> **WIP** = Work In Progress (Qwen model not yet tested)
 
 ### Usage
 

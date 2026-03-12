@@ -16,7 +16,8 @@
 openclaw-workspace/
 ├── skills/                  # AI 技能目录 / AI Skills
 │   ├── web-search/         # 五子并行搜索技能
-│   └── scc-tunnel/         # SCC 内网穿透技能
+│   ├── scc-tunnel/         # SCC 内网穿透技能
+│   └── image-edit/         # ComfyUI 图像编辑（WIP）
 ├── docs/                    # 文档目录 / Documentation
 │   └── personality/        # AI 人格配置文档
 ├── .gitignore              # Git 忽略配置
@@ -78,12 +79,13 @@ This is the dedicated workspace repository for OpenClaw AI Assistant, used to st
 
 ### Available Skills
 
-| Skill | Description | Documentation |
-|-------|-------------|---------------|
-| **[web-search](skills/web-search/)** | Five-agent parallel search mechanism | [View Docs](skills/web-search/README.md) |
-| **[scc-tunnel](skills/scc-tunnel/)** | SCC tunnel tool to expose local services to public internet | [View Docs](skills/scc-tunnel/README.md) |
+| Skill | Description | Documentation | Status |
+|-------|-------------|---------------|--------|
+| **[web-search](skills/web-search/)** | Five-agent parallel search mechanism | [View Docs](skills/web-search/README.md) | ✅ |
+| **[scc-tunnel](skills/scc-tunnel/)** | SCC tunnel tool to expose local services to public internet | [View Docs](skills/scc-tunnel/README.md) | ✅ |
+| **[image-edit](skills/image-edit/)** | ComfyUI AI image editing (Hunyuan/Qwen) | [View Docs](skills/image-edit/README.md) | ⏳ WIP |
 
-> More skills coming soon...
+> **WIP** = Work In Progress (Qwen model not yet tested)
 
 ### Documentation
 
