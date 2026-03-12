@@ -10,19 +10,19 @@
 
 ---
 
-## 🌏 中文
+## 中文
 
 ### 简介
 
 本目录包含 OpenClaw AI 助手的各种技能，每个技能都是独立的功能模块。
 
-### 📁 当前技能
+### 当前技能
 
 | 技能 | 描述 | 状态 |
 |------|------|------|
-| **[web-search](web-search/)** | 五子并行搜索技能 | ✅ 已完成 |
+| **[web-search](web-search/)** | 五子并行搜索技能 | 已完成 |
 
-### 🔧 web-search 技能
+### web-search 技能
 
 五子 agent 并行搜索机制，覆盖中文、英文、官方源和结构化数据。
 
@@ -87,7 +87,7 @@ asyncio.run(main())
 | `DEEP_CRAWL_ENABLED` | true | 是否深入抓取页面 |
 | `MAX_PAGES_PER_AGENT` | 3 | 每个 agent 抓取页面数 |
 
-#### ⚠️ 安全注意事项
+#### ⚠ 安全注意事项
 
 - **不要提交 `.env` 文件** - 已添加到 `.gitignore`
 - **Token 定期更新** - 建议 90 天更换一次
@@ -95,19 +95,19 @@ asyncio.run(main())
 
 ---
 
-## 🌍 English
+## English
 
 ### Introduction
 
 This directory contains various skills for OpenClaw AI Assistant. Each skill is an independent functional module.
 
-### 📁 Current Skills
+### Current Skills
 
 | Skill | Description | Status |
 |-------|-------------|--------|
-| **[web-search](web-search/)** | Five-agent parallel search skill | ✅ Completed |
+| **[web-search](web-search/)** | Five-agent parallel search skill | Completed |
 
-### 🔧 web-search Skill
+### web-search Skill
 
 Five-agent parallel search mechanism, covering Chinese, English, official sources, and structured data.
 
@@ -172,7 +172,7 @@ asyncio.run(main())
 | `DEEP_CRAWL_ENABLED` | true | Enable deep page crawling |
 | `MAX_PAGES_PER_AGENT` | 3 | Max pages to crawl per agent |
 
-#### ⚠️ Security Notes
+#### ⚠ Security Notes
 
 - **Do not commit `.env` file** - Already added to `.gitignore`
 - **Rotate Token regularly** - Recommended every 90 days
@@ -180,7 +180,7 @@ asyncio.run(main())
 
 ---
 
-## 📝 许可证 / License
+## 许可证 / License
 
 MIT License
 

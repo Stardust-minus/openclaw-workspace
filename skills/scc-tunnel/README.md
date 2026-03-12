@@ -10,21 +10,21 @@
 
 ---
 
-## 🌏 中文
+## 中文
 
 ### 简介
 
 使用 SCC (scc-cli) 内网穿透工具启动 HTTP/TCP 隧道，将本地服务暴露到公网，无需配置服务器。
 
-### 🔧 功能特性
+### 功能特性
 
-- ✅ **无需认证** - 无需登录即可使用
-- ✅ **HTTP 隧道** - 适用于 Web 服务
-- ✅ **TCP 隧道** - 适用于数据库、SSH 等
-- ✅ **动态域名** - HTTP 隧道每次生成不同的 UUID 域名
-- ✅ **快速启动** - 一条命令即可启动
+- **无需认证** - 无需登录即可使用
+- **HTTP 隧道** - 适用于 Web 服务
+- **TCP 隧道** - 适用于数据库、SSH 等
+- **动态域名** - HTTP 隧道每次生成不同的 UUID 域名
+- **快速启动** - 一条命令即可启动
 
-### 📦 安装
+### 安装
 
 **方式 1：一键安装脚本（推荐）**
 
@@ -75,7 +75,7 @@ scc --version
 # sudo apt install scc-cli  # 如果有的话
 ```
 
-### 🚀 快速开始
+### 快速开始
 
 **HTTP 隧道（推荐用于 Web 服务）**
 ```bash
@@ -99,7 +99,7 @@ scc tunnel tcp 22
 # 🎉 You're ready to go live at tcp://tunnel.paracloud.com:15627 => tcp://localhost:22
 ```
 
-### 📋 使用场景
+### 使用场景
 
 | 场景 | 命令 | 说明 |
 |------|------|------|
@@ -109,14 +109,14 @@ scc tunnel tcp 22
 | 数据库 | `scc tunnel tcp 3306` | 远程数据库访问 |
 | SSH | `scc tunnel tcp 22` | 远程 SSH 访问 |
 
-### 🔍 命令别名
+### 命令别名
 
 ```bash
 scc tun http 2017    # tunnel 可简写为 tun
 scc tun tcp 2017
 ```
 
-### 📊 输出格式
+### 输出格式
 
 **HTTP 隧道：**
 ```
@@ -128,7 +128,7 @@ scc tun tcp 2017
 🎉 You're ready to go live at tcp://tunnel.paracloud.com:<随机端口> => tcp://localhost:<端口>
 ```
 
-### ⚠️ 注意事项
+### ⚠ 注意事项
 
 | 注意事项 | 说明 |
 |----------|------|
@@ -138,7 +138,7 @@ scc tun tcp 2017
 | **公网访问** | 生成的 URL 可从任何地方访问 |
 | **无需认证** | 无需登录即可使用 |
 
-### ❓ FAQ
+### FAQ
 
 **Q: 为什么二进制文件不推送到 Git 仓库？**
 
@@ -149,9 +149,9 @@ A: 二进制文件不适合版本控制，原因：
 - 更新麻烦，需要重新提交
 
 推荐做法：
-- ✅ 提供官方下载链接
-- ✅ 提供一键安装脚本
-- ✅ 在 README 中说明安装步骤
+- 提供官方下载链接
+- 提供一键安装脚本
+- 在 README 中说明安装步骤
 
 **Q: SCC 隧道稳定吗？**
 
@@ -167,7 +167,7 @@ A: 免费隧道可能有超时限制，建议：
 - 重要服务使用付费方案
 - 定期检查隧道状态
 
-### 🛠️ 管理隧道进程
+### 🛠 管理隧道进程
 
 **查看运行中的隧道：**
 ```bash
@@ -184,21 +184,21 @@ kill <PID>
 
 ---
 
-## 🌍 English
+## English
 
 ### Introduction
 
 Use SCC (scc-cli) tunnel tool to start HTTP/TCP tunnels and expose local services to public internet without server configuration.
 
-### 🔧 Features
+### Features
 
-- ✅ **No authentication required** - Use without login
-- ✅ **HTTP tunnel** - For web services
-- ✅ **TCP tunnel** - For databases, SSH, etc.
-- ✅ **Dynamic domain** - HTTP tunnel generates different UUID domain each time
-- ✅ **Quick start** - One command to start
+- **No authentication required** - Use without login
+- **HTTP tunnel** - For web services
+- **TCP tunnel** - For databases, SSH, etc.
+- **Dynamic domain** - HTTP tunnel generates different UUID domain each time
+- **Quick start** - One command to start
 
-### 📦 Installation
+### Installation
 
 **1. Download scc-cli**
 
@@ -220,7 +220,7 @@ scc --version
 # Output: scc version 0.1.3
 ```
 
-### 🚀 Quick Start
+### Quick Start
 
 **HTTP Tunnel (for web services)**
 ```bash
@@ -244,7 +244,7 @@ scc tunnel tcp 22
 # 🎉 You're ready to go live at tcp://tunnel.paracloud.com:15627 => tcp://localhost:22
 ```
 
-### 📋 Use Cases
+### Use Cases
 
 | Use Case | Command | Description |
 |----------|---------|-------------|
@@ -254,14 +254,14 @@ scc tunnel tcp 22
 | Database | `scc tunnel tcp 3306` | Remote database access |
 | SSH | `scc tunnel tcp 22` | Remote SSH access |
 
-### 🔍 Command Aliases
+### Command Aliases
 
 ```bash
 scc tun http 2017    # tunnel can be abbreviated as tun
 scc tun tcp 2017
 ```
 
-### 📊 Output Format
+### Output Format
 
 **HTTP Tunnel:**
 ```
@@ -273,7 +273,7 @@ scc tun tcp 2017
 🎉 You're ready to go live at tcp://tunnel.paracloud.com:<random-port> => tcp://localhost:<port>
 ```
 
-### ⚠️ Notes
+### ⚠ Notes
 
 | Note | Description |
 |------|-------------|
@@ -283,7 +283,7 @@ scc tun tcp 2017
 | **Public access** | Generated URL can be accessed from anywhere |
 | **No auth required** | Can use without login |
 
-### 🛠️ Manage Tunnel Processes
+### 🛠 Manage Tunnel Processes
 
 **View running tunnels:**
 ```bash
@@ -300,7 +300,7 @@ kill <PID>
 
 ---
 
-## 📝 许可证 / License
+## 许可证 / License
 
 MIT License
 

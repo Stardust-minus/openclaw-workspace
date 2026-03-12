@@ -10,7 +10,7 @@
 
 ---
 
-## 📁 目录结构 / Directory Structure
+## 目录结构 / Directory Structure
 
 ```
 openclaw-workspace/
@@ -25,13 +25,13 @@ openclaw-workspace/
 
 ---
 
-## 🌏 中文
+## 中文
 
 ### 简介
 
 这是 OpenClaw AI 助手的工作空间仓库，用于存储 AI 技能、项目代码和自动化脚本。
 
-### 🔧 可用技能
+### 可用技能
 
 | 技能 | 描述 | 详细文档 |
 |------|------|----------|
@@ -40,19 +40,19 @@ openclaw-workspace/
 
 > 更多技能正在添加中...
 
-### 📚 文档
+### 文档
 
 | 文档 | 说明 |
 |------|------|
 | **[人格配置](docs/personality/)** | AI 助手的角色设定和行为准则 |
 
-### 💡 技能说明
+### 技能说明
 
 每个技能都是独立的模块，包含：
-- ✅ 完整的中英双语文档
-- ✅ 安装和配置说明
-- ✅ 使用示例
-- ✅ 安全注意事项
+- 完整的中英双语文档
+- 安装和配置说明
+- 使用示例
+- 安全注意事项
 
 **使用流程：**
 1. 克隆仓库
@@ -61,7 +61,7 @@ openclaw-workspace/
 4. 配置环境变量（如需）
 5. 开始使用
 
-### ⚠️ 安全注意事项
+### ⚠ 安全注意事项
 
 - **不要提交 `.env` 文件** - 已添加到 `.gitignore`
 - **Token 定期更新** - 建议 90 天更换一次
@@ -69,13 +69,13 @@ openclaw-workspace/
 
 ---
 
-## 🌍 English
+## English
 
 ### Introduction
 
 This is the dedicated workspace repository for OpenClaw AI Assistant, used to store AI skills, project code, and automation scripts.
 
-### 🔧 Available Skills
+### Available Skills
 
 | Skill | Description | Documentation |
 |-------|-------------|---------------|
@@ -84,19 +84,19 @@ This is the dedicated workspace repository for OpenClaw AI Assistant, used to st
 
 > More skills coming soon...
 
-### 📚 Documentation
+### Documentation
 
 | Document | Description |
 |----------|-------------|
 | **[Personality](docs/personality/)** | AI assistant character settings and behavioral guidelines |
 
-### 💡 Skill Structure
+### Skill Structure
 
 Each skill is an independent module containing:
-- ✅ Complete bilingual documentation (Chinese/English)
-- ✅ Installation and configuration instructions
-- ✅ Usage examples
-- ✅ Security notes
+- Complete bilingual documentation (Chinese/English)
+- Installation and configuration instructions
+- Usage examples
+- Security notes
 
 **Usage Flow:**
 1. Clone repository
@@ -105,7 +105,7 @@ Each skill is an independent module containing:
 4. Configure environment variables (if needed)
 5. Start using
 
-### ⚠️ Security Notes
+### ⚠ Security Notes
 
 - **Do not commit `.env` files** - Already added to `.gitignore`
 - **Rotate Token regularly** - Recommended every 90 days
@@ -113,7 +113,7 @@ Each skill is an independent module containing:
 
 ---
 
-## 📝 许可证 / License
+## 许可证 / License
 
 MIT License
 

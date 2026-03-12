@@ -10,13 +10,13 @@
 
 ---
 
-## 🌏 中文
+## 中文
 
 ### 简介
 
 五子 agent 并行搜索机制，覆盖中文、英文、官方源和结构化数据。搜索结果自动保存到 JSON 文件，避免大数据量返回被截断。
 
-### 🔧 五子架构
+### 五子架构
 
 | 序号 | 类型 | 搜索方式 | 工具 | 覆盖范围 |
 |------|------|----------|------|----------|
@@ -26,7 +26,7 @@
 | 4 | API | Brave API | Brave Search | 英文/海外 |
 | 5 | 抓取 | 定向网站 | Playwright 直接访问 | 结构化数据 |
 
-### 📦 安装
+### 安装
 
 **1. 安装依赖**
 ```bash
@@ -51,7 +51,7 @@ ZHIPU_API_KEY=your_key_here
 BRAVE_API_KEY=your_key_here
 ```
 
-### 🚀 使用方法
+### 使用方法
 
 **在子 agent 中调用：**
 ```python
@@ -76,7 +76,7 @@ result = await search(
 }
 ```
 
-### 📊 配置选项
+### 配置选项
 
 | 配置项 | 默认值 | 说明 |
 |--------|--------|------|
@@ -87,7 +87,7 @@ result = await search(
 | `DEEP_CRAWL_ENABLED` | true | 是否深入抓取页面 |
 | `MAX_PAGES_PER_AGENT` | 3 | 每个 agent 抓取页面数 |
 
-### 📁 目录结构
+### 目录结构
 
 ```
 web-search/
@@ -105,7 +105,7 @@ web-search/
 └── .gitignore          # Git 忽略
 ```
 
-### ⚠️ 安全注意事项
+### ⚠ 安全注意事项
 
 - **不要提交 `.env` 文件** - 已添加到 `.gitignore`
 - **Token 定期更新** - 建议 90 天更换一次
@@ -113,13 +113,13 @@ web-search/
 
 ---
 
-## 🌍 English
+## English
 
 ### Introduction
 
 Five-agent parallel search mechanism, covering Chinese, English, official sources, and structured data. Search results are automatically saved to JSON files to avoid truncation.
 
-### 🔧 Five-Agent Architecture
+### Five-Agent Architecture
 
 | # | Type | Search Method | Tool | Coverage |
 |---|------|---------------|------|----------|
@@ -129,7 +129,7 @@ Five-agent parallel search mechanism, covering Chinese, English, official source
 | 4 | API | Brave API | Brave Search | English/Overseas |
 | 5 | Crawler | Direct Website | Playwright direct access | Structured data |
 
-### 📦 Installation
+### Installation
 
 **1. Install dependencies**
 ```bash
@@ -153,7 +153,7 @@ ZHIPU_API_KEY=your_key_here
 BRAVE_API_KEY=your_key_here
 ```
 
-### 🚀 Usage
+### Usage
 
 **Call in sub-agent:**
 ```python
@@ -178,7 +178,7 @@ result = await search(
 }
 ```
 
-### 📊 Configuration Options
+### Configuration Options
 
 | Option | Default | Description |
 |--------|---------|-------------|
@@ -189,7 +189,7 @@ result = await search(
 | `DEEP_CRAWL_ENABLED` | true | Enable deep page crawling |
 | `MAX_PAGES_PER_AGENT` | 3 | Max pages to crawl per agent |
 
-### 📁 Directory Structure
+### Directory Structure
 
 ```
 web-search/
@@ -207,7 +207,7 @@ web-search/
 └── .gitignore          # Git ignore
 ```
 
-### ⚠️ Security Notes
+### ⚠ Security Notes
 
 - **Do not commit `.env` files** - Already added to `.gitignore`
 - **Rotate Token regularly** - Recommended every 90 days
@@ -215,7 +215,7 @@ web-search/
 
 ---
 
-## 📝 许可证 / License
+## 许可证 / License
 
 MIT License
 
