@@ -33,7 +33,7 @@ class BingSearch:
             async with async_playwright() as p:
                 browser = await p.firefox.launch(headless=self.headless)
                 context = await browser.new_context(
-                    user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0'
+                    user_agent='Mozilla/5.0 (X11; Linux x86_64; rv:146.0) Gecko/20100101 Firefox/146.0'
                 )
                 page = await context.new_page()
                 
