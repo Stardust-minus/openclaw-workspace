@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+
+# 环境变量（敏感）
+.env
+
+# 日志
+*.log
+
+# 临时文件
+*.tmp
+*.temp
+
+# 搜索结果缓存
+cache/
+results/

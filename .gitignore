@@ -1,0 +1,33 @@
+# 敏感信息
+.env
+.env.local
+.env.*.local
+
+# 临时文件
+*.log
+*.tmp
+*.temp
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# 搜索结果（可能包含大量数据）
+search_results.json
+*_search_results.json
+
+# 测试文件
+test_*.py
+*_test.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 系统文件
+.DS_Store
+Thumbs.db
