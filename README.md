@@ -16,9 +16,9 @@
 openclaw-workspace/
 ├── skills/                  # AI 技能目录 / AI Skills
 │   ├── web-search/         # 五子并行搜索技能
-│   ├── scc-tunnel/         # SCC 内网穿透技能
-│   ├── image-edit/         # ComfyUI 图像编辑技能
-│   └── ...
+│   └── scc-tunnel/         # SCC 内网穿透技能
+├── docs/                    # 文档目录 / Documentation
+│   └── personality/        # AI 人格配置文档
 ├── .gitignore              # Git 忽略配置
 └── README.md               # 本文件
 ```
@@ -40,6 +40,12 @@ openclaw-workspace/
 
 > 更多技能正在添加中...
 
+### 📚 文档
+
+| 文档 | 说明 |
+|------|------|
+| **[人格配置](docs/personality/)** | AI 助手的角色设定和行为准则 |
+
 ### 💡 技能说明
 
 每个技能都是独立的模块，包含：
@@ -54,22 +60,6 @@ openclaw-workspace/
 3. 按照 README 安装依赖
 4. 配置环境变量（如需）
 5. 开始使用
-
-### 快速开始
-
-**1. 克隆仓库**
-```bash
-git clone https://github.com/Stardust-minus/openclaw-workspace.git
-cd openclaw-workspace
-```
-
-**2. 浏览技能**
-```bash
-ls skills/
-```
-
-**3. 使用技能**
-每个技能都有独立的 README 文档，包含详细的配置和使用说明。
 
 ### ⚠️ 安全注意事项
 
@@ -91,23 +81,29 @@ This is the dedicated workspace repository for OpenClaw AI Assistant, used to st
 |-------|-------------|---------------|
 | **[web-search](skills/web-search/)** | Five-agent parallel search mechanism | [View Docs](skills/web-search/README.md) |
 | **[scc-tunnel](skills/scc-tunnel/)** | SCC tunnel tool to expose local services to public internet | [View Docs](skills/scc-tunnel/README.md) |
-| **[image-edit](skills/image-edit/)** | ComfyUI Hunyuan image editing skill | [View Docs](skills/image-edit/README.md) |
 
-### Quick Start
+> More skills coming soon...
 
-**1. Clone repository**
-```bash
-git clone https://github.com/Stardust-minus/openclaw-workspace.git
-cd openclaw-workspace
-```
+### 📚 Documentation
 
-**2. Browse skills**
-```bash
-ls skills/
-```
+| Document | Description |
+|----------|-------------|
+| **[Personality](docs/personality/)** | AI assistant character settings and behavioral guidelines |
 
-**3. Use skills**
-Each skill has its own README with detailed configuration and usage instructions.
+### 💡 Skill Structure
+
+Each skill is an independent module containing:
+- ✅ Complete bilingual documentation (Chinese/English)
+- ✅ Installation and configuration instructions
+- ✅ Usage examples
+- ✅ Security notes
+
+**Usage Flow:**
+1. Clone repository
+2. Enter skill directory
+3. Install dependencies per README
+4. Configure environment variables (if needed)
+5. Start using
 
 ### ⚠️ Security Notes
 
