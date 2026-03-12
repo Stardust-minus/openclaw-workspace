@@ -45,13 +45,11 @@ scc --version
 
 访问官方下载页面：
 - **下载链接**: https://dl.scc.paratera.com/scc-cli/latest/
-- **GitHub**: （如果有）
 
-选择对应平台的压缩包：
+**支持平台：**
 - `scc-cli-0.1.3_linux_x86_64.tar.gz` - Linux x86_64
-- `scc-cli-0.1.3_darwin_x86_64.tar.gz` - macOS Intel
-- `scc-cli-0.1.3_darwin_arm64.tar.gz` - macOS Apple Silicon
-- `scc-cli-0.1.3_windows_x86_64.zip` - Windows
+
+> ⚠ **注意**：SCC 目前仅提供 Linux 版本，Windows 和 macOS 用户建议使用 Docker 或虚拟机运行。
 
 **手动安装步骤：**
 ```bash
@@ -70,15 +68,7 @@ sudo chmod +x /usr/local/bin/scc
 scc --version
 ```
 
-**方式 3：使用包管理器（如果可用）**
 
-```bash
-# Homebrew (macOS)
-# brew install scc-cli  # 如果有的话
-
-# APT (Ubuntu/Debian)
-# sudo apt install scc-cli  # 如果有的话
-```
 
 ### 快速开始
 
