@@ -33,7 +33,7 @@ class BaiduSearch:
             async with async_playwright() as p:
                 browser = await p.chromium.launch(headless=self.headless)
                 context = await browser.new_context(
-                    user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                    user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
                     viewport={'width': 1920, 'height': 1080, 'isMobile': False}
                 )
                 page = await context.new_page()
@@ -73,7 +73,7 @@ class BaiduSearch:
                 search_results = await page.evaluate(js_code)
                 
                 # 处理百度重定向链接
-                for result in results:
+                for result in search_results:
                     url = result.get('url', '')
                     if url and 'baidu.com/link?url=' in url:
                         # 提取真实 URL
