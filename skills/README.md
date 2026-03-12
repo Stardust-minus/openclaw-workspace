@@ -22,8 +22,7 @@
 |------|------|----------|
 | **[web-search](web-search/)** | 五子并行搜索机制，覆盖中文、英文、官方源 | [查看文档](web-search/README.md) |
 | **[scc-tunnel](scc-tunnel/)** | SCC 内网穿透工具，HTTP/TCP 隧道 | [查看文档](scc-tunnel/README.md) |
-
-> 更多技能正在添加中...
+| **[image-edit](image-edit/)** | ComfyUI AI 图像编辑（Hunyuan/Qwen） | [查看文档](image-edit/README.md) |
 
 ### 使用方式
 

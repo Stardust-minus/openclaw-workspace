@@ -37,8 +37,7 @@ openclaw-workspace/
 |------|------|----------|
 | **[web-search](skills/web-search/)** | 五子并行搜索机制，覆盖中文、英文、官方源 | [查看文档](skills/web-search/README.md) |
 | **[scc-tunnel](skills/scc-tunnel/)** | SCC 内网穿透工具，HTTP/TCP 隧道 | [查看文档](skills/scc-tunnel/README.md) |
-
-> 更多技能正在添加中...
+| **[image-edit](skills/image-edit/)** | ComfyUI AI 图像编辑（Hunyuan/Qwen） | [查看文档](skills/image-edit/README.md) |
 
 ### 文档
 
