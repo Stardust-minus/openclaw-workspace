@@ -54,7 +54,6 @@ openclaw-workspace/
 - 完整的中英双语文档
 - 安装和配置说明
 - 使用示例
-- 安全注意事项
 
 **使用流程：**
 1. 克隆仓库
@@ -93,7 +92,6 @@ Each skill is an independent module containing:
 - Complete bilingual documentation (Chinese/English)
 - Installation and configuration instructions
 - Usage examples
-- Security notes
 
 **Usage Flow:**
 1. Clone repository
