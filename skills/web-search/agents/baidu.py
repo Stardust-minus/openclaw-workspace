@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-百度搜索 Agent - Playwright + Chromium
+百度搜索 Agent - Playwright + Chromium (PC 端)
 """
 
 import asyncio
@@ -9,16 +9,16 @@ from playwright.async_api import async_playwright
 
 
 class BaiduSearch:
-    """百度搜索 Agent"""
+    """百度搜索 Agent - PC 端方案"""
     
     def __init__(self):
-        self.base_url = "https://m.baidu.com/s"  # 使用手机版百度，反爬较宽松
+        self.base_url = "https://www.baidu.com/s"  # 使用 PC 版百度
         self.timeout = 300
         self.headless = True
         
     async def search(self, query: str, max_results: int = 10) -> Dict[str, Any]:
         """
-        执行百度搜索
+        执行百度搜索（PC 端）
         
         Args:
             query: 搜索关键词
@@ -33,8 +33,8 @@ class BaiduSearch:
             async with async_playwright() as p:
                 browser = await p.chromium.launch(headless=self.headless)
                 context = await browser.new_context(
-                    user_agent='Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1',
-                    viewport={'width': 375, 'height': 812, 'isMobile': True}
+                    user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                    viewport={'width': 1920, 'height': 1080, 'isMobile': False}
                 )
                 page = await context.new_page()
                 
@@ -42,13 +42,13 @@ class BaiduSearch:
                 search_url = f"{self.base_url}?wd={query}"
                 await page.goto(search_url, timeout=self.timeout * 1000)
                 
-                # 等待搜索结果加载（手机版百度使用 .result 选择器）
+                # 等待搜索结果加载（PC 版百度使用 .result 选择器）
                 try:
                     await page.wait_for_selector('.result', timeout=10000)
                 except:
                     await page.wait_for_timeout(3000)
                 
-                # 提取搜索结果（手机版百度）
+                # 提取搜索结果（PC 版百度）
                 js_code = """() => {
                     const results = [];
                     const maxResults = MAX_RESULTS_PLACEHOLDER;
