@@ -117,12 +117,112 @@ for agent_name, agent_data in data['agents'].items():
 }
 ```
 
+## 轻量搜索（web_fetch 直抓）
+
+当 Playwright 不可用或不需要深度搜索时，可直接用 web_fetch 抓取搜索引擎结果页。
+
+### 搜索引擎 URL 列表
+
+#### 国内引擎（8）
+
+| 引擎 | URL 模板 | 说明 |
+|------|----------|------|
+| 百度 | `https://www.baidu.com/s?wd={keyword}` | 中文覆盖广，偶尔空结果 |
+| Bing CN | `https://cn.bing.com/search?q={keyword}&ensearch=0` | 国内版 Bing |
+| Bing INT | `https://cn.bing.com/search?q={keyword}&ensearch=1` | 国际版 Bing |
+| 360 | `https://www.so.com/s?q={keyword}` | 备用中文引擎 |
+| 搜狗 | `https://sogou.com/web?query={keyword}` | 中文最稳，不易触发验证码 |
+| 微信 | `https://wx.sogou.com/weixin?type=2&query={keyword}` | 搜公众号文章 |
+| 头条 | `https://so.toutiao.com/search?keyword={keyword}` | 备用中文引擎 |
+| 集思录 | `https://www.jisilu.cn/explore/?keyword={keyword}` | 投资理财 |
+
+#### 国际引擎（9）
+
+| 引擎 | URL 模板 | 说明 |
+|------|----------|------|
+| Google | `https://www.google.com/search?q={keyword}` | JS challenge，web_fetch 抓不到 |
+| Google HK | `https://www.google.com.hk/search?q={keyword}` | 同上 |
+| DuckDuckGo | `https://duckduckgo.com/html/?q={keyword}` | 英文最稳，支持 Bangs |
+| Yahoo | `https://search.yahoo.com/search?p={keyword}` | 备用英文引擎 |
+| Startpage | `https://www.startpage.com/sp/search?query={keyword}` | Google 结果 + 隐私 |
+| Brave | `https://search.brave.com/search?q={keyword}` | 独立索引 |
+| Ecosia | `https://www.ecosia.org/search?q={keyword}` | 易触发验证码 |
+| Qwant | `https://www.qwant.com/?q={keyword}` | 欧盟 GDPR |
+| WolframAlpha | `https://www.wolframalpha.com/input?i={keyword}` | 知识计算 |
+
+### 轻量搜索优先级
+
+1. **搜狗**（中文首选，最稳）
+2. **DuckDuckGo**（英文首选，最稳）
+3. **百度**（中文备用）
+4. **360 / 头条**（中文备用）
+5. **Bing**（浏览器降级时首选）
+6. **Google**（最后手段，headless 会触发验证码）
+
+### 浏览器降级策略
+
+当 web_fetch 返回以下内容时，自动降级到 browser tool：
+- "Please solve the challenge" / "验证码" / "captcha"
+- "unusual traffic" / "异常流量"
+- 空内容（rawLength < 100）
+- 搜索引擎登录/设置页面
+
+```javascript
+// 浏览器搜索 Bing（降级首选）
+browser({"action": "open", "url": "https://cn.bing.com/search?q=关键词"})
+browser({"action": "snapshot", "targetId": "t1"})
+
+// 浏览器搜索 Google（最后手段）
+browser({"action": "open", "url": "https://www.google.com/search?q=关键词"})
+```
+
+### 高级搜索运算符
+
+| 运算符 | 示例 | 说明 |
+|--------|------|------|
+| `site:` | `site:github.com python` | 限定网站 |
+| `filetype:` | `filetype:pdf report` | 限定文件类型 |
+| `""` | `"machine learning"` | 精确匹配 |
+| `-` | `python -snake` | 排除词 |
+| `OR` | `cat OR dog` | 或逻辑 |
+
+### 时间过滤（Google/Bing）
+
+| 参数 | 说明 |
+|------|------|
+| `tbs=qdr:h` | 过去一小时 |
+| `tbs=qdr:d` | 过去一天 |
+| `tbs=qdr:w` | 过去一周 |
+| `tbs=qdr:m` | 过去一个月 |
+| `tbs=qdr:y` | 过去一年 |
+
+### DuckDuckGo Bangs
+
+| Bang | 目标 |
+|------|------|
+| `!g` | Google |
+| `!gh` | GitHub |
+| `!so` | Stack Overflow |
+| `!w` | Wikipedia |
+| `!yt` | YouTube |
+
+### Jina.ai 内容中转
+
+抓取具体页面内容时，如遇反爬可用 Jina.ai 中转：
+
+```javascript
+web_fetch({"url": "https://r.jina.ai/https://example.com/article"})
+```
+
 ## 最佳实践
 
 1. **搜索结果较大时** - 让子 agent 保存文件，只返回文件路径
 2. **需要详细数据时** - 读取 JSON 文件，手动整理
 3. **进度推送** - 默认关闭，需要时设置 `ENABLE_PROGRESS_PUSH=true`
 4. **深度抓取** - 耗时较长，简单搜索可设置 `DEEP_CRAWL_ENABLED=false`
+5. **轻量搜索** - 不需要 Playwright 时直接用 web_fetch，搜狗 + DuckDuckGo 最稳
+6. **浏览器降级** - web_fetch 触发验证码时，用 browser tool 搜 Bing
+7. **web_fetch UA** - 已配置为 Chrome UA，减少验证码触发
 
 ## 示例
 
