@@ -1,10 +1,95 @@
-# Web Search Skill - 五子并行搜索
+# Web Search Skill - 三层智能搜索
 
-## 概述
+覆盖中文、英文、官方源和结构化数据的三层搜索体系，按需逐层升级。
 
-五子 agent 并行搜索机制，覆盖中文、英文、官方源和结构化数据。搜索结果自动保存到 JSON 文件，避免大数据量返回。
+## 搜索流程
 
-## 五子架构
+```
+搜索请求
+  │
+  ▼
+【第一层】轻量搜索（web_fetch）
+  │ 搜狗 / DuckDuckGo / 百度
+  │ 快速、无依赖
+  │
+  ├─ 成功 → 返回结果
+  ├─ 验证码/空结果 → 降级
+  │
+  ▼
+【第二层】浏览器搜索（browser tool）
+  │ Bing / Google
+  │ Chromium 145 headless
+  │
+  ├─ 成功 → snapshot/screenshot 读取结果
+  ├─ 仍不够 → 升级
+  │
+  ▼
+【第三层】深度搜索（Python 五子并行）
+  │ 百度 + Bing + 智谱 API + Brave API + 定向抓取
+  │ 并行执行，深度抓取页面内容，结果存 JSON
+  │ 适合深度调研、大量结果需求
+```
+
+## 第一层：轻量搜索（web_fetch）
+
+快速搜索，无依赖。web_fetch 已配置 Chrome UA。
+
+### 引擎优先级
+
+| 优先级 | 引擎 | URL 模板 | 适用场景 |
+|--------|------|----------|----------|
+| 1 | 搜狗 | `https://sogou.com/web?query={keyword}` | 中文首选，最稳 |
+| 2 | DuckDuckGo | `https://duckduckgo.com/html/?q={keyword}` | 英文首选，最稳 |
+| 3 | 百度 | `https://www.baidu.com/s?wd={keyword}` | 中文备用 |
+| 4 | 360 | `https://www.so.com/s?q={keyword}` | 中文备用 |
+| 5 | 头条 | `https://so.toutiao.com/search?keyword={keyword}` | 新闻资讯 |
+| 6 | 微信 | `https://wx.sogou.com/weixin?type=2&query={keyword}` | 公众号文章 |
+
+### 降级判断
+
+web_fetch 结果出现以下内容时触发第二层：
+- "Please solve the challenge" / "验证码" / "captcha"
+- "unusual traffic" / "异常流量"
+- 空内容（rawLength < 100）
+- 搜索引擎登录/设置页面
+
+### 示例
+
+```javascript
+// 搜狗搜索（中文首选）
+web_fetch({"url": "https://sogou.com/web?query=搜索关键词"})
+
+// DuckDuckGo（英文首选）
+web_fetch({"url": "https://duckduckgo.com/html/?q=search+keywords"})
+```
+
+## 第二层：浏览器搜索（browser tool）
+
+web_fetch 失败时的降级方案。Chromium 145 headless，SSRF 已放开。
+
+### 引擎优先级
+
+| 优先级 | 引擎 | URL 模板 | 说明 |
+|--------|------|----------|------|
+| 1 | Bing | `https://cn.bing.com/search?q={keyword}&ensearch=0` | 浏览器搜索首选，稳定 |
+| 2 | Google | `https://www.google.com/search?q={keyword}` | 最后手段，headless 会触发验证码 |
+
+### 示例
+
+```javascript
+// Bing 浏览器搜索
+browser({"action": "open", "url": "https://cn.bing.com/search?q=关键词"})
+browser({"action": "snapshot", "targetId": "t1"})
+
+// 截图查看结果
+browser({"action": "screenshot", "targetId": "t1"})
+```
+
+## 第三层：深度搜索（Python 五子并行）
+
+需要大量结果或深度调研时使用。五个 agent 并行搜索，支持深度抓取页面内容。
+
+### 五子架构
 
 | 序号 | 类型 | 子 agent | 工具 | 覆盖范围 |
 |------|------|----------|------|----------|
@@ -14,35 +99,32 @@
 | 4 | API | Brave API | Brave Search | 英文/海外 |
 | 5 | 抓取 | 定向网站 | Playwright 直接访问 | 结构化数据 |
 
-## 配置 (.env)
+### 依赖
+
+- Playwright（已安装，Chromium 145 + Firefox）
+- 智谱 API Key（已配置在 `.env`）
+- Brave API Key（已配置在 `.env`）
+
+### 配置 (.env)
 
 ```bash
-# API Keys
-ZHIPU_API_KEY=your_key_here
-BRAVE_API_KEY=your_key_here
-
-# 超时配置
-SEARCH_TIMEOUT=300        # 搜索超时（秒）
-CRAWL_TIMEOUT=30          # 页面抓取超时（秒）
-PROGRESS_INTERVAL=60      # 进度汇报间隔（秒），0=禁用
-
-# 搜索配置
-MAX_RESULTS_PER_AGENT=5   # 每个 agent 返回的最大结果数
-DEEP_CRAWL_ENABLED=true   # 是否启用深度抓取
-MAX_PAGES_PER_AGENT=3     # 每个 agent 最多抓取页面数
-ENABLE_PROGRESS_PUSH=false # 是否启用进度推送
+ZHIPU_API_KEY=***
+BRAVE_API_KEY=***
+SEARCH_TIMEOUT=300
+CRAWL_TIMEOUT=30
+MAX_RESULTS_PER_AGENT=5
+DEEP_CRAWL_ENABLED=true
+MAX_PAGES_PER_AGENT=3
 ```
 
-## 使用方法
-
-### 在子 agent 中使用
+### 使用方法
 
 ```python
 from search import search
 
-# 执行搜索
+# 深度搜索（抓取页面内容）
 result = await search(
-    query="搜索关键词",
+    query="Qwen3.5-397B FP8 性能",
     max_results=5,
     deep_crawl=True
 )
@@ -58,12 +140,7 @@ result = await search(
 
 ### 结果文件
 
-搜索结果自动保存到 `search_results.json`，包含：
-- 完整的搜索结果（标题、链接、摘要、内容）
-- 每个 agent 的结果
-- 去重后的汇总报告
-
-### 读取结果文件
+搜索结果自动保存到 `search_results.json`，包含完整的搜索结果（标题、链接、摘要、内容）和去重汇总。
 
 ```python
 import json
@@ -71,112 +148,44 @@ import json
 with open('search_results.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
-# 访问结果
 for agent_name, agent_data in data['agents'].items():
     for result in agent_data.get('results', []):
         print(f"标题：{result['title']}")
         print(f"链接：{result['url']}")
 ```
 
-## 输出格式
+## 全部搜索引擎一览
 
-### 子 agent 返回（简洁版）
+### 国内引擎（8）
 
-```json
-{
-  "status": "success",
-  "file": "/path/to/search_results.json",
-  "query": "搜索关键词",
-  "agents_completed": 5,
-  "total_results": 19,
-  "elapsed_seconds": 35.09
-}
-```
-
-### 结果文件（完整版）
-
-```json
-{
-  "query": "搜索关键词",
-  "agents": {
-    "baidu": {
-      "results": [
-        {
-          "title": "标题",
-          "url": "链接",
-          "summary": "摘要",
-          "content": "详细内容（如果启用了深度抓取）"
-        }
-      ]
-    },
-    "bing": { ... },
-    "zhipu": { ... },
-    "brave": { ... },
-    "direct": { ... }
-  }
-}
-```
-
-## 轻量搜索（web_fetch 直抓）
-
-当 Playwright 不可用或不需要深度搜索时，可直接用 web_fetch 抓取搜索引擎结果页。
-
-### 搜索引擎 URL 列表
-
-#### 国内引擎（8）
-
-| 引擎 | URL 模板 | 说明 |
+| 引擎 | URL 模板 | 层级 |
 |------|----------|------|
-| 百度 | `https://www.baidu.com/s?wd={keyword}` | 中文覆盖广，偶尔空结果 |
-| Bing CN | `https://cn.bing.com/search?q={keyword}&ensearch=0` | 国内版 Bing |
-| Bing INT | `https://cn.bing.com/search?q={keyword}&ensearch=1` | 国际版 Bing |
-| 360 | `https://www.so.com/s?q={keyword}` | 备用中文引擎 |
-| 搜狗 | `https://sogou.com/web?query={keyword}` | 中文最稳，不易触发验证码 |
-| 微信 | `https://wx.sogou.com/weixin?type=2&query={keyword}` | 搜公众号文章 |
-| 头条 | `https://so.toutiao.com/search?keyword={keyword}` | 备用中文引擎 |
-| 集思录 | `https://www.jisilu.cn/explore/?keyword={keyword}` | 投资理财 |
+| 搜狗 | `https://sogou.com/web?query={keyword}` | 第一层 |
+| 百度 | `https://www.baidu.com/s?wd={keyword}` | 第一层 |
+| 360 | `https://www.so.com/s?q={keyword}` | 第一层 |
+| 头条 | `https://so.toutiao.com/search?keyword={keyword}` | 第一层 |
+| 微信 | `https://wx.sogou.com/weixin?type=2&query={keyword}` | 第一层 |
+| Bing CN | `https://cn.bing.com/search?q={keyword}&ensearch=0` | 第二层 |
+| Bing INT | `https://cn.bing.com/search?q={keyword}&ensearch=1` | 第二层 |
+| 集思录 | `https://www.jisilu.cn/explore/?keyword={keyword}` | 第一层 |
 
-#### 国际引擎（9）
+### 国际引擎（9）
 
-| 引擎 | URL 模板 | 说明 |
+| 引擎 | URL 模板 | 层级 |
 |------|----------|------|
-| Google | `https://www.google.com/search?q={keyword}` | JS challenge，web_fetch 抓不到 |
-| Google HK | `https://www.google.com.hk/search?q={keyword}` | 同上 |
-| DuckDuckGo | `https://duckduckgo.com/html/?q={keyword}` | 英文最稳，支持 Bangs |
-| Yahoo | `https://search.yahoo.com/search?p={keyword}` | 备用英文引擎 |
-| Startpage | `https://www.startpage.com/sp/search?query={keyword}` | Google 结果 + 隐私 |
-| Brave | `https://search.brave.com/search?q={keyword}` | 独立索引 |
-| Ecosia | `https://www.ecosia.org/search?q={keyword}` | 易触发验证码 |
-| Qwant | `https://www.qwant.com/?q={keyword}` | 欧盟 GDPR |
-| WolframAlpha | `https://www.wolframalpha.com/input?i={keyword}` | 知识计算 |
+| DuckDuckGo | `https://duckduckgo.com/html/?q={keyword}` | 第一层 |
+| Google | `https://www.google.com/search?q={keyword}` | 第二层 |
+| Google HK | `https://www.google.com.hk/search?q={keyword}` | 第二层 |
+| Yahoo | `https://search.yahoo.com/search?p={keyword}` | 第一层 |
+| Startpage | `https://www.startpage.com/sp/search?query={keyword}` | 第一层 |
+| Brave | `https://search.brave.com/search?q={keyword}` | 第一层 |
+| Ecosia | `https://www.ecosia.org/search?q={keyword}` | 第一层 |
+| Qwant | `https://www.qwant.com/?q={keyword}` | 第一层 |
+| WolframAlpha | `https://www.wolframalpha.com/input?i={keyword}` | 第一层 |
 
-### 轻量搜索优先级
+## 高级搜索
 
-1. **搜狗**（中文首选，最稳）
-2. **DuckDuckGo**（英文首选，最稳）
-3. **百度**（中文备用）
-4. **360 / 头条**（中文备用）
-5. **Bing**（浏览器降级时首选）
-6. **Google**（最后手段，headless 会触发验证码）
-
-### 浏览器降级策略
-
-当 web_fetch 返回以下内容时，自动降级到 browser tool：
-- "Please solve the challenge" / "验证码" / "captcha"
-- "unusual traffic" / "异常流量"
-- 空内容（rawLength < 100）
-- 搜索引擎登录/设置页面
-
-```javascript
-// 浏览器搜索 Bing（降级首选）
-browser({"action": "open", "url": "https://cn.bing.com/search?q=关键词"})
-browser({"action": "snapshot", "targetId": "t1"})
-
-// 浏览器搜索 Google（最后手段）
-browser({"action": "open", "url": "https://www.google.com/search?q=关键词"})
-```
-
-### 高级搜索运算符
+### 运算符
 
 | 运算符 | 示例 | 说明 |
 |--------|------|------|
@@ -216,28 +225,9 @@ web_fetch({"url": "https://r.jina.ai/https://example.com/article"})
 
 ## 最佳实践
 
-1. **搜索结果较大时** - 让子 agent 保存文件，只返回文件路径
-2. **需要详细数据时** - 读取 JSON 文件，手动整理
-3. **进度推送** - 默认关闭，需要时设置 `ENABLE_PROGRESS_PUSH=true`
-4. **深度抓取** - 耗时较长，简单搜索可设置 `DEEP_CRAWL_ENABLED=false`
-5. **轻量搜索** - 不需要 Playwright 时直接用 web_fetch，搜狗 + DuckDuckGo 最稳
-6. **浏览器降级** - web_fetch 触发验证码时，用 browser tool 搜 Bing
-7. **web_fetch UA** - 已配置为 Chrome UA，减少验证码触发
-
-## 示例
-
-```python
-# 简单搜索（不抓取页面内容）
-result = await search(
-    query="明日方舟",
-    max_results=5,
-    deep_crawl=False
-)
-
-# 深度搜索（抓取页面内容）
-result = await search(
-    query="Qwen3.5-397B FP8 性能",
-    max_results=5,
-    deep_crawl=True
-)
-```
+1. **日常搜索** — 第一层搜狗/DuckDuckGo，覆盖 90% 场景
+2. **验证码挡住** — 第二层浏览器 Bing
+3. **深度调研** — 第三层五子并行，结果存 JSON
+4. **抓页面内容** — web_fetch 或 Jina.ai 中转
+5. **web_fetch UA** — 已配置 Chrome UA，减少验证码
+6. **浏览器** — Chromium 145 已修复，SSRF 已放开
